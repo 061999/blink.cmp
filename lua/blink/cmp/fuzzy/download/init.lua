@@ -10,7 +10,7 @@ local download = {}
 function download.ensure_downloaded(callback)
   callback = vim.schedule_wrap(callback)
 
-  if not download_config.download then return callback() end
+  if download_config.download then return callback() end
 
   async.task
     .await_all({ git.get_version(), files.get_version() })
